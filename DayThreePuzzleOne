@@ -1,0 +1,43 @@
+#include <fstream>
+#include <string>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+
+int main(){
+    std::ifstream file("DayThreeData.txt");
+    std::string line;
+
+    int totalPriority = 0;
+    int lengthOfString;
+
+    while(std::getline(file,line)){
+        char c1 =line.length();
+        char c2 =line.length() / 2;
+
+        std::string firstHalf = line.substr(0, c2);
+        std::string secondHalf = line.substr(c2);
+        std::cout<<firstHalf<<secondHalf<<std::endl;
+//The SubStr Works
+
+        for(int i = 0; i < firstHalf.size(); i++){
+           for(int j = 0; j < secondHalf.size(); j++){
+            if(firstHalf.at(i) == secondHalf.at(j)){
+                char c3 = firstHalf.at(i);
+                if(c3 <= 'Z'){
+                    totalPriority += c3 - 'A' + 27;
+                }
+                else{
+                    totalPriority += c3 - 'a' + 1;
+                }
+                goto stop;
+            }
+        } 
+        }
+        stop:
+     ;   
+    }
+    std::cout<<totalPriority<<std::endl;
+    return 0;
+}
